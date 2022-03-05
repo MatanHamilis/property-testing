@@ -1,0 +1,51 @@
+\documentclass[12pt,a4paper]{book}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{hyperref}
+
+% Titletoc
+\titlecontents*{chapter}% <section-type>
+  [0pt]% <left>
+  {}% <above-code>
+  {\bfseries\chaptername\ \thecontentslabel\quad}% <numbered-entry-format>
+  {}% <numberless-entry-format>
+  {\bfseries\hfill\contentspage}% <filler-page-format>
+
+
+% Fancyhdr
+\renewcommand{\chaptername}{Lecture}
+
+% Metadata 
+\author{  Matan Hamilis \\
+  Reichman University \\
+  \texttt{matan@hamil.is}}
+\title{Property Testing Course \\ {\large Spring 2022}}
+\date{}
+
+% Algorithm2e 
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+
+% Hyperref
+\hypersetup{
+    colorlinks = true,
+    linkcolor = black,
+    pdftitle = {Introduction to Property Testing},
+}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\input{preface.tex}
+\input{lectures/lecture_01.tex}
+\bibliographystyle{plain}
+\bibliography{bibliography}
+\end{document}
