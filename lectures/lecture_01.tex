@@ -1,4 +1,4 @@
-\chapter{}
+\chapter{}\label{lec:1}
 \section{Introduction}
 Conceptually, we are used to consider algorithms as "efficient" if their execution steps are bounded by a polynomial $f(|x|)$ for input $x$.
 The best thing we can wish to achieve is an algorithm running in linear time, this is because we are used to think that we have to at least read the entire input to make so decision about the input itself.
@@ -30,11 +30,12 @@ We can think of a property as a subset of some general set of objects.
 For example, the property of a graph being connected implies the existence of some universal set of graphs $\mathcal{G}$ and a subset of $\mathcal{G}$ denoted $\mathcal{P}$ which includes all connected graphs.
 Therefore, for convenience, a property $\mathcal{P}$ will often be referred to as the set of all instances possessing these property.
 
-A property testing algorithm for property $\mathcal{P}$ and proximity parameter $\epsilon$ is a \textbf{randommized} algorithm such that given some instance of a problem $G$:
+\begin{definition}[Property Tester]\label{def:property_tester}
+A Property Tester, for property $\mathcal{P}$ and proximity parameter $\epsilon$ is a \textbf{randommized} algorithm such that given some instance of a problem $G$:
 
 - If $G \in \mathcal{P}$ the algorithm accepts with probability $\geq 2/3$.
 - If $G$ is at least $\epsilon$-far (w.r.t to some predetermined distance measure) from being in $G$ the algorithm rejects with probability $\geq 2/3$.
-
+\end{definition}
 Notice that by doing so we give absolutely zero guarantee about the output of our algorithm for instances that do not posses the property but are less than $\epsilon$-far from holding it.
 
 It is also important to mention that the constant of $2/3$ is arbitrary and any \textbf{constant} greater than $1/2$ would suffice because by the means of \textbf{amplification} we can increase it.
@@ -44,7 +45,7 @@ This will be presented and defined in greater depth later.
 
 \section{Toy Example}
 
-\subsection{The Problem}
+\subsection{The Problem}\label{subsec:binary_sequence_problem}
 
 In this section we will solve a toy example for property testing which will examplify many aspects of proeprty testing.
 
@@ -73,7 +74,7 @@ It will never reject when $w=0^n$.
 If $w$ is $\epsilon$-far from $0^n$, then:
 \[
 \begin{aligned}
-P[\text{error}] &= P[\text{no 1's found in the sample}] &\\
+\pr{\text{error}} &= \pr{\text{no 1's found in the sample}} &\\
 &\leq (1-\epsilon)^s &\\
 &\leq e^{-\epsilon \cdot s} & (1-x \leq e^{-x})\\
 &\leq e^{-2} & (s=2/\epsilon)\\
@@ -91,15 +92,15 @@ In this subsection we discuss a modified version of our toy example in which we 
 - Input: A $n$-characters long binary string $w\in \left\{0,1\right\}^n$.
 - Output: An estimate to the fraction of 1's in $w$.
 
-It suffices to sample $s=\Theta\left(\epsilon^-2\right)$ positions and output the average to get the fraction of 1's $\pm \epsilon$ (i.e. with additive error of $\epsilon$) with probability $\geq 2/3$.
+It suffices to sample $s=\Theta\braces{\epsilon^-2}$ positions and output the average to get the fraction of 1's $\pm \epsilon$ (i.e. with additive error of $\epsilon$) with probability $\geq 2/3$.
 
 This can be proven using \href{https://en.wikipedia.org/wiki/Chernoff_bound}{Chernoff Bound}:
-\begin{theorem}[Chernoff Bound]
-Let $X_1,X_2,\ldots,X_k$ be indentical, independent random variables in $\left[0,1\right]$ and let $p=E\left[X_1\right]$. Denote $X=\sum_{i=1}^kX_i$ (sum of the samples).
+\begin{theorem}[Chernoff Bound]\label{thm:chernoff_bound}
+Let $X_1,X_2,\ldots,X_k$ be indentical, independent random variables in \brackets{0,1} and let $p=E\brackets{X_1}$. Denote $X=\sum_{i=1}^kX_i$ (sum of the samples).
 
 Then for any $\epsilon \in \left(0,1\right]$ the following holds:
 \[
-P\left[\left|\frac{X}{k}-p\right| \geq \epsilon\right] \leq 2\cdot e^{-\epsilon^2k/4}
+\pr{\abs{\frac{X}{k}-p} \geq \epsilon} \leq 2\cdot e^{-\epsilon^2k/4}
 \]
 \end{theorem}
 
