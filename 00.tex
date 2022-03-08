@@ -6,6 +6,7 @@
 \usepackage{amsfonts}
 \usepackage[ruled,vlined]{algorithm2e}
 \usepackage{hyperref}
+\usepackage{tikz}
 
 % Titletoc
 \titlecontents*{chapter}% <section-type>
@@ -32,6 +33,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[chapter]
 \newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
 
 % Hyperref
 \hypersetup{
@@ -41,6 +43,14 @@
     citecolor = blue
 }
 
+% Commands
+\newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
+\newcommand{\floor}[1]{\ensuremath{\lfloor#1\rfloor}}
+\newcommand{\brackets}[1]{\ensuremath{\left[#1\right]}}
+\newcommand{\braces}[1]{\ensuremath{\left(#1\right)}}
+\newcommand{\of}[1]{\braces{#1}}
+\newcommand{\cbraces}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\pr}[1]{\ensuremath{\text{Pr}\brackets{#1}}}
 \begin{document}
 \maketitle
 
